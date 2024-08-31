@@ -143,13 +143,13 @@ $grid-gutter-width: 1.5rem !default;
 $border-color: $gray-300;
 $dark-border-color: $gray-700;
 
-$border-radius: 1rem;
+$border-radius: 0.25rem;
 $border-radius-sm: $border-radius * 0.875;
 $border-radius-lg: $border-radius * 1.25;
 
-$box-shadow: 0 1.6rem 3rem rgba($black, 0.1);
-$box-shadow-sm: 0 0.8rem 3rem rgba($black, 0.075);
-$box-shadow-lg: 0 1.6rem 3rem rgba($black, 0.175);
+$box-shadow: 0 1.6rem 3rem rgba($black, 0.05);
+$box-shadow-sm: 0 0.8rem 3rem rgba($black, 0.0375);
+$box-shadow-lg: 0 1.6rem 3rem rgba($black, 0.0875);
 
 //
 // Typography

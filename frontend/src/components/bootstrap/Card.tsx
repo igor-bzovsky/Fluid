@@ -611,7 +611,7 @@ Card.propTypes = {
 Card.defaultProps = {
 	className: undefined,
 	shadow: null,
-	borderSize: null,
+	borderSize: 1,
 	borderColor: null,
 	tag: 'div',
 	hasTab: false,

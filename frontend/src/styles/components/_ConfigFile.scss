@@ -9,9 +9,9 @@ $aside: (
 	mobile-breakpoint: md,
 	width: 15rem,
 	// Don't forget to make changes to the .env file as well.
-	background-color: shade-color($primary, 95%),
+	background-color: rgba-to-rgb(rgba($primary, 0.5), $dark),
 	border-size: 0,
-	border-color: shade-color($primary, 95%),
+	border-color: rgba-to-rgb(rgba($primary, 0.5), $dark),
 	minimize: (
 		width: 4.5rem,
 	),

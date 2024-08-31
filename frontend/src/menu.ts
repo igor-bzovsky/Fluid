@@ -30,11 +30,21 @@ export const summaryPageTopMenu = {
 	},
 };
 
+export const mainPagesMenu = {
+	flowsheet: {
+		id: 'flowsheet',
+		text: 'Flowsheet',
+		path: '/',
+		icon: 'Flowsheet',
+		subMenu: null,
+	},
+};
+
 export const dashboardPagesMenu = {
 	dashboard: {
 		id: 'dashboard',
 		text: 'Dashboard',
-		path: '/',
+		path: 'dashboard',
 		icon: 'Dashboard',
 		subMenu: null,
 	},

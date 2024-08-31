@@ -15,3 +15,8 @@
 		// height: calc(100% - #{map-get($footer, height)});
 	}
 }
+
+div:has(> #flowsheet) {
+	/* Styles for parent element */
+	padding: 0;
+}

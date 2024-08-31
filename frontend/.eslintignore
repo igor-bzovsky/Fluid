@@ -1,0 +1,11 @@
+SvgIcons/
+build/
+storybook-static/
+node_modules/
+public/
+src/assets
+src/components/icon/
+#src/pages/documentation
+src/styles
+vite.config.mts
+src/reportWebVitals.ts

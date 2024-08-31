@@ -1,0 +1,31 @@
+{
+  "name": "fluid",
+  "version": "0.0.1",
+  "description": "Simulation software",
+  "scripts": {
+    "build": "yarn clean && yarn build-frontend && run-script-os",
+    "build:macos": "./venv/bin/python build-macos.py py2app",
+    "build:windows": ".\\venv\\Scripts\\pyinstaller build-windows.spec",
+    "build:linux": "./venv/bin/pyinstaller build-linux.spec",
+    "build-frontend": "cd frontend && yarn build",
+    "clean": "run-script-os",
+    "clean:default": "rm -rf dist 2>/dev/null; rm -rf gui 2>/dev/null; rm -rf build 2>/dev/null; ",
+    "clean:windows": "if exist dist rd /S /Q dist & if exist build rd /S /Q build & if exist gui rd /S /Q gui",
+    "dev": "cd frontend && yarn dev",
+    "init-app": "yarn install && yarn init-frontend",
+    "init-frontend": "cd frontend && yarn install",
+    "start": "yarn build-frontend && run-script-os",
+    "start:windows": ".\\venv\\Scripts\\python backend\\index.py",
+    "start:default": "./venv/bin/python backend/index.py"
+  },
+  "keywords": [
+    "process flow",
+    "simulation",
+    "modelling"
+  ],
+  "author": "Igor Bzovsky",
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "run-script-os": "^1.1.6"
+  }
+}

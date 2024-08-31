@@ -1,0 +1,66 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js init
+
+PATH: 
+  C:\Program Files (x86)\Common Files\Intel\Shared Libraries\intel64\libfabric\bin\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\intel64\libfabric\bin\utils;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\intel64\bin;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\ia32;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\intel64;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Java\jdk-13.0.1\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\HashiCorp\Vagrant\bin;C:\Program Files\PuTTY\;C:\Program Files (x86)\Yarn\bin\;C:\Gradle\gradle-6.0.1\bin;C:\Program Files (x86)\Microsoft SQL Server\150\DTS\Binn\;C:\Program Files (x86)\Brackets\command;C:\Program Files\MongoDB\Server\4.2\bin;C:\Program Files\Git\cmd;C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin;C:\Program Files\nuget;C:\Program Files\Microsoft SQL Server\150\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\GnuWin32\bin;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;C:\Program Files (x86)\Common Files\AspenTech Shared\;C:\Program Files (x86)\dotnet\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\intel64\;C:\Program Files (x86)\Common Files\Intel\Shared Libraries\ia32\;C:\Program Files\Common Files\AspenTech Shared\;C:\Program Files (x86)\NoteBook FanControl\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\MATLAB\R2023b\bin;C:\Program Files\nodejs\;C:\Users\Asus TUF\AppData\Local\Programs\Python\Python312\Scripts\;C:\Users\Asus TUF\AppData\Local\Programs\Python\Python312\;C:\Users\Asus TUF\AppData\Local\Microsoft\WindowsApps;C:\Users\Asus TUF\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Asus TUF\.dotnet\tools;C:\Users\Asus TUF\AppData\Local\Yarn\bin;C:\Users\Asus TUF\AppData\Local\Android\Sdk\platform-tools;C:\Program Files\JetBrains\PyCharm 2019.3.3\bin;;C:\Program Files (x86)\Rico Suter\NSwagStudio\;C:\Users\Asus TUF\AppData\Local\Microsoft\WindowsApps;C:\Program Files\mingw-w64\x86_64-8.1.0-posix-seh-rt_v6-rev0\mingw64\bin;C:\Users\Asus TUF\.dotnet\tools;C:\Users\Asus TUF\go\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\Common Files\AspenTech Shared\;AspenTech\Aspen Hydraulics;C:\Users\Asus TUF\AppData\Roaming\npm
+
+Yarn version: 
+  1.21.1
+
+Node version: 
+  20.16.0
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: canceled
+      at Interface.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:136925:13)
+      at Interface.emit (node:events:519:28)
+      at [_ttyWrite] [as _ttyWrite] (node:internal/readline/interface:1126:18)
+      at ReadStream.onkeypress (node:internal/readline/interface:265:20)
+      at ReadStream.emit (node:events:519:28)
+      at emitKeys (node:internal/readline/utils:371:14)
+      at emitKeys.next (<anonymous>)
+      at ReadStream.onData (node:internal/readline/emitKeypressEvents:64:36)
+      at ReadStream.emit (node:events:519:28)
+      at addChunk (node:internal/streams/readable:559:12)
+
+npm manifest: 
+  {
+    "name": "fluid",
+    "version": "0.0.1",
+    "description": "Simulation software",
+    "scripts": {
+      "build": "yarn clean && yarn build-frontend && run-script-os",
+      "build:macos": "./venv/bin/python build-macos.py py2app",
+      "build:windows": ".\\venv\\Scripts\\pyinstaller build-windows.spec",
+      "build:linux": "./venv/bin/pyinstaller build-linux.spec",
+      "build-frontend": "cd frontend && yarn build",
+      "clean": "run-script-os",
+      "clean:default": "rm -rf dist 2>/dev/null; rm -rf gui 2>/dev/null; rm -rf build 2>/dev/null; ",
+      "clean:windows": "if exist dist rd /S /Q dist & if exist build rd /S /Q build & if exist gui rd /S /Q gui",
+      "dev": "cd frontend && yarn dev",
+      "init": "yarn install && yarn init-frontend",
+      "init-frontend": "cd frontend && yarn install",
+      "start": "yarn build-frontend && run-script-os",
+      "start:windows": ".\\venv\\Scripts\\python backend\\index.py",
+      "start:default": "./venv/bin/python backend/index.py"
+    },
+    "keywords": [
+      "process flow",
+      "simulation",
+      "modelling"
+    ],
+    "author": "Igor Bzovsky",
+    "license": "MIT",
+    "devDependencies": {
+      "run-script-os": "^1.1.6"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

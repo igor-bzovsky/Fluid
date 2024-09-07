@@ -1,19 +1,19 @@
-import React, { useCallback } from 'react';
-import { 
-	ReactFlow,
-	MiniMap,
-  	Controls,
-	Background,
-	BackgroundVariant,
-	useNodesState,
-  	useEdgesState,
+import React, { useRef, useCallback } from 'react';
+import {
+  	ReactFlow,
+  	ReactFlowProvider,
   	addEdge,
+  	useNodesState,
+  	useEdgesState,
+  	Controls,
+  	useReactFlow,
 } from '@xyflow/react';
-import PageWrapper from '../../layout/PageWrapper/PageWrapper';
-import Page from '../../layout/Page/Page';
-import { pageLayoutTypesPagesMenu } from '../../menu';
 
 import '@xyflow/react/dist/style.css';
+
+import UnitOperations from '../../components/UnitOperations';
+import { DragAndDropProvider, useDragAndDrop } from '../../contexts/dragAndDropContext';
+
 
 const initialNodes = [
 	{ id: '1', position: { x: 0, y: 0 }, data: { label: '1' } },
@@ -22,37 +22,79 @@ const initialNodes = [
 
 const initialEdges = [{ id: 'e1-2', source: '1', target: '2' }];
 
-const FlowsheetPage = () => {
-	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+let id = 0;
+const getId = () => `dndnode_${id++}`;
 
-	  const onConnect = useCallback(
-		(params: any) => setEdges((eds) => addEdge(params, eds)),
-		[setEdges],
-	  );
-	
-	return (
-		<PageWrapper title={pageLayoutTypesPagesMenu.pageLayout.subMenu.onlyHeader.text}>
-			<Page container='fluid'>
-				<div id='flowsheet' className='row d-flex align-items-center h-100'>
-					<div
-						className='col-12 d-flex justify-content-center align-items-center'
-						style={{ fontSize: 'calc(1rem + 1vw)', width: '100%', height: '100%', padding: '0'}}>
-							<ReactFlow
-      						  	nodes={nodes}
-      						  	edges={edges}
-      						  	onNodesChange={onNodesChange}
-      						  	onEdgesChange={onEdgesChange}
-      						  	onConnect={onConnect}>
-								<Controls />
-								<MiniMap />
-								<Background variant={BackgroundVariant.Dots} gap={12} size={1} />
-							</ReactFlow>
-					</div>
-				</div>
-			</Page>
-		</PageWrapper>
-	);
+const FlowsheetPage = () => {
+  	const reactFlowWrapper = useRef(null);
+  	const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  	const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  	const { screenToFlowPosition } = useReactFlow();
+  	const [type] = useDragAndDrop();
+
+  	const onConnect = useCallback(
+    	(params: any) => setEdges((eds) => addEdge(params, eds)),
+    	[setEdges],
+  	);
+
+  	const onDragOver = useCallback((event: any) => {
+    	event.preventDefault();
+    	event.dataTransfer.dropEffect = 'move';
+  	}, []);
+
+  	const onDrop = useCallback(
+    	(event: any) => {
+      		event.preventDefault();
+
+      		// check if the dropped element is valid
+      		if (!type) {
+        		return;
+      		}
+
+      		// project was renamed to screenToFlowPosition
+      		// and you don't need to subtract the reactFlowBounds.left/top anymore
+      		// details: https://reactflow.dev/whats-new/2023-11-10
+      		const position = screenToFlowPosition({
+        		x: event.clientX,
+        		y: event.clientY,
+      		});
+      		const newNode = {
+        		id: getId(),
+        		type,
+        		position,
+        		data: { label: `${type} node` },
+      		};
+
+      		setNodes((nds) => nds.concat(newNode));
+    	},
+    	[screenToFlowPosition, type],
+  	);
+
+  	return (
+    	<div className="flowsheet">
+      		<div className="reactflow-wrapper" ref={reactFlowWrapper}>
+        		<ReactFlow
+          			nodes={nodes}
+          			edges={edges}
+          			onNodesChange={onNodesChange}
+          			onEdgesChange={onEdgesChange}
+          			onConnect={onConnect}
+          			onDrop={onDrop}
+          			onDragOver={onDragOver}
+          			fitView
+        		>
+          			<Controls />
+        		</ReactFlow>
+      		</div>
+      		<UnitOperations />
+    	</div>
+  	);
 };
 
-export default FlowsheetPage;
+export default () => (
+  	<ReactFlowProvider>
+    	<DragAndDropProvider>
+      		<FlowsheetPage />
+    	</DragAndDropProvider>
+  	</ReactFlowProvider>
+);
